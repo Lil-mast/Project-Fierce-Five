@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Franchise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: navy;
+            background-color: #f9f9f9;
+            color: #333;
         }
         .top-bar {
             width: 100%;
-            background-color: white;
-            padding: 10px;
+            background-color: #0044cc;
+            color: white;
+            padding: 20px;
             text-align: center;
             position: fixed;
             top: 0;
@@ -25,12 +28,12 @@
             z-index: 1000;
         }
         .sidebar {
-            background-color: lightgrey;
-            color: black;
+            background-color: #0044cc;
+            color: white;
             padding: 20px;
             height: 100vh;
             position: fixed;
-            top: 50px;
+            top: 60px;
             left: 0;
             width: 250px;
             overflow-y: auto;
@@ -41,21 +44,22 @@
         }
         .sidebar a {
             display: block;
-            color: black;
-            padding: 10px;
+            color: white;
+            padding: 15px;
             text-decoration: none;
             margin-bottom: 10px;
-            background-color: navy;
+            background-color: #003399;
             border-radius: 5px;
             text-align: center;
+            transition: background-color 0.3s;
         }
         .sidebar a:hover {
-            background-color: #000066;
+            background-color: #002266;
         }
         .toggle-btn {
             cursor: pointer;
-            background: white;
-            color: black;
+            background: #0044cc;
+            color: white;
             border: none;
             padding: 10px;
             position: fixed;
@@ -63,10 +67,11 @@
             top: 10px;
             font-size: 20px;
             z-index: 1100;
+            border-radius: 5px;
         }
         .main-content {
             margin-left: 270px;
-            margin-top: 60px;
+            margin-top: 80px;
             padding: 20px;
             display: flex;
             flex-wrap: wrap;
@@ -75,25 +80,63 @@
         }
         .product {
             background-color: white;
-            padding: 15px;
-            border-radius: 5px;
+            padding: 20px;
+            border-radius: 10px;
             text-align: center;
             width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
         .add-to-cart {
-            background-color: navy;
+            background-color: #0044cc;
             color: white;
             padding: 10px;
             border: none;
             cursor: pointer;
             margin-top: 10px;
             border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .add-to-cart:hover {
+            background-color: #003399;
         }
         .cart {
             margin-top: 20px;
             background: white;
-            padding: 15px;
-            border-radius: 5px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            .main-content {
+                margin-left: 220px;
+            }
+        }
+        @media (max-width: 576px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+            .sidebar.collapsed {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+            .toggle-btn {
+                left: auto;
+                right: 10px;
+                top: 70px;
+            }
         }
     </style>
     <script>
@@ -127,26 +170,31 @@
     </div>
     <div class="main-content">
         <div class="product" data-category="discount">
+            <img src="hoodie.jpg" alt="Hoodie" style="width:100%; border-radius: 10px;">
             <h3>Hoodie</h3>
             <p>20% OFF - 2080 KSH</p>
             <button class="add-to-cart" onclick="addToCart('Hoodie', 2080)">Add to Cart</button>
         </div>
         <div class="product" data-category="limited">
+            <img src="umbrella.jpg" alt="Umbrella" style="width:100%; border-radius: 10px;">
             <h3>Umbrella</h3>
             <p>2600 KSH</p>
             <button class="add-to-cart" onclick="addToCart('Umbrella', 2600)">Add to Cart</button>
         </div>
         <div class="product" data-category="limited">
+            <img src="keyholder.jpg" alt="Keyholder" style="width:100%; border-radius: 10px;">
             <h3>Keyholder</h3>
             <p>450 KSH</p>
             <button class="add-to-cart" onclick="addToCart('Keyholder', 450)">Add to Cart</button>
         </div>
         <div class="product" data-category="limited">
+            <img src="pen.jpg" alt="Pen" style="width:100%; border-radius: 10px;">
             <h3>Pen</h3>
             <p>750 KSH</p>
             <button class="add-to-cart" onclick="addToCart('Pen', 750)">Add to Cart</button>
         </div>
         <div class="product" data-category="limited">
+            <img src="water_bottle.jpg" alt="Water Bottle" style="width:100%; border-radius: 10px;">
             <h3>Water Bottle</h3>
             <p>799 KSH</p>
             <button class="add-to-cart" onclick="addToCart('Water Bottle', 799)">Add to Cart</button>
