@@ -1,1 +1,183 @@
-# Project-Fierce-Five
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franchise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: navy;
+        }
+        .top-bar {
+            width: 100%;
+            background-color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        .sidebar {
+            background-color: lightgrey;
+            color: black;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            top: 50px;
+            left: 0;
+            width: 250px;
+            overflow-y: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+        .sidebar.collapsed {
+            transform: translateX(-250px);
+        }
+        .sidebar a {
+            display: block;
+            color: black;
+            padding: 10px;
+            text-decoration: none;
+            margin-bottom: 10px;
+            background-color: navy;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .sidebar a:hover {
+            background-color: #000066;
+        }
+        .toggle-btn {
+            cursor: pointer;
+            background: white;
+            color: black;
+            border: none;
+            padding: 10px;
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            font-size: 20px;
+            z-index: 1100;
+        }
+        .main-content {
+            margin-left: 270px;
+            margin-top: 60px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .product {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            width: 200px;
+            position: relative;
+        }
+        .discount {
+            color: red;
+            font-weight: bold;
+        }
+        .limited {
+            color: green;
+            font-weight: bold;
+        }
+        .add-to-cart {
+            background-color: navy;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .cart {
+            background: navy;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: none;
+            text-align: center;
+        }
+        .cart h3 {
+            color: white;
+        }
+        .cart .remove-item {
+            background-color: red;
+            color: white;
+            padding: 5px;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+            border-radius: 3px;
+        }
+    </style>
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('collapsed');
+        }
+        function showCategory(category) {
+            let products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                product.style.display = (category === 'all-items' || category === 'all' || product.getAttribute('data-category') === category) ? 'block' : 'none';
+            });
+        }
+        function addToCart(item, price) {
+            let cartList = document.getElementById('cart-items');
+            let totalElement = document.getElementById('total-price');
+            let listItem = document.createElement('li');
+            let removeButton = document.createElement('button');
+            removeButton.textContent = "Remove";
+            removeButton.className = "remove-item";
+            removeButton.onclick = function () {
+                cartList.removeChild(listItem);
+                let total = parseInt(totalElement.textContent) - price;
+                totalElement.textContent = total;
+            };
+            listItem.textContent = item + " - " + price + " KSH";
+            listItem.appendChild(removeButton);
+            cartList.appendChild(listItem);
+            let total = parseInt(totalElement.textContent) + price;
+            totalElement.textContent = total;
+            document.querySelector('.cart').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <div class="top-bar">Franchise</div>
+    <div class="sidebar">
+        <a href="#" onclick="showCategory('all')">Home</a>
+        <a href="#" onclick="showCategory('all-items')">All Items</a>
+        <a href="#" onclick="showCategory('discount')">Clothes on Discount</a>
+        <a href="#" onclick="showCategory('limited')">Limited Edition</a>
+        <a href="#" onclick="document.querySelector('.cart').style.display = 'block'">My Cart</a>
+    </div>
+    <div class="main-content">
+        <div class="product" data-category="discount">Hoodies - <span class="discount">2080 KSH (20% Off)</span> <button class="add-to-cart" onclick="addToCart('Hoodie', 2080)">Add to Cart</button></div>
+        <div class="product" data-category="discount">Socks - <span class="discount">282 KSH (12% Off)</span> <button class="add-to-cart" onclick="addToCart('Socks', 282)">Add to Cart</button></div>
+        <div class="product limited" data-category="limited">Umbrellas - 2600 KSH <button class="add-to-cart" onclick="addToCart('Umbrella', 2600)">Add to Cart</button></div>
+        <div class="product limited" data-category="limited">Keyholders - 450 KSH <button class="add-to-cart" onclick="addToCart('Keyholder', 450)">Add to Cart</button></div>
+        <div class="product" data-category="all">Mugs - 450 KSH <button class="add-to-cart" onclick="addToCart('Mug', 450)">Add to Cart</button></div>
+        <div class="product" data-category="all">T-Shirts (Black & White) - 500 KSH <button class="add-to-cart" onclick="addToCart('T-Shirt', 500)">Add to Cart</button></div>
+    </div>
+    <div class="cart">
+        <h3>My Cart</h3>
+        <ul id="cart-items"></ul>
+        <p>Total: <span id="total-price">0</span> KSH</p>
+        <h4>Payment Methods</h4>
+        <p>Mpesa, Visa, KCB Bank, PayPal</p>
+    </div>
+</body>
+</html>
