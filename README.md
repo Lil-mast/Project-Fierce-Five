@@ -4,7 +4,7 @@ Welcome to **Project-Fierce-Five**! This project includes both a **frontend** an
 
 ## Frontend
 The frontend is built using:
-- HTML
+- HTML/ typescript
 - CSS
 - JavaScript
 
@@ -12,7 +12,8 @@ The frontend is built using:
 The backend is built using:
 - Node.js
 - Express.js
-- MongoDB
+- Rust
+- SQL
 
 ## How to Contribute
 1. Fork the repository.
