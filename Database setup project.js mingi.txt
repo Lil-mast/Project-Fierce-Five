@@ -1,0 +1,27 @@
+backend/
+├── config/
+│   └── db.js                 # Database connection setup
+├── controllers/
+│   ├── authController.js     # Handles user authentication logic
+│   ├── cartController.js     # Handles cart-related logic
+│   ├── orderController.js    # Handles order/checkout logic
+│   └── productController.js  # Handles product-related logic
+├── middleware/
+│   └── authMiddleware.js     # JWT authentication middleware
+├── models/
+│   ├── User.js               # User schema and model
+│   ├── Product.js            # Product schema and model
+│   ├── Cart.js               # Cart schema and model
+│   └── Order.js              # Order schema and model
+├── routes/
+│   ├── auth.js               # Routes for user authentication
+│   ├── cart.js               # Routes for cart operations
+│   ├── order.js              # Routes for order/checkout
+│   └── product.js            # Routes for product operations
+├── utils/
+│   └── errorHandler.js       # Custom error handling utility
+├── .env                      # Environment variables
+├── .gitignore                # Files/folders to ignore in Git
+├── app.js                    # Express app configuration
+├── server.js                 # Entry point for the server
+└── package.json              # Project dependencies and scripts
